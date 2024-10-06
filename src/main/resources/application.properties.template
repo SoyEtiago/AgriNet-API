@@ -1,0 +1,29 @@
+# Application Properties Template for MongoDB Atlas
+
+# This file serves as a template for configuring your Spring Boot application to connect to MongoDB Atlas.
+# Make a copy of this file and rename it to application.properties.
+# Then, fill in the appropriate values based on your MongoDB Atlas cluster.
+
+# ===============================
+# MongoDB Configuration
+# ===============================
+# MongoDB connection string for Atlas
+# Replace <username>, <password>, <cluster-url>, and <dbname> with your own values.
+spring.data.mongodb.uri=mongodb+srv://<username>:<password>@<cluster-url>/<dbname>?retryWrites=true&w=majority
+
+# Set the database name (optional if included in the URI)
+# spring.data.mongodb.database=<dbname>
+
+# ===============================
+# Profiles Configuration
+# ===============================
+# Uncomment the desired active profile
+# spring.profiles.active=dev
+# spring.profiles.active=test
+# spring.profiles.active=prod
+
+# ===============================
+# Custom Application Properties
+# ===============================
+# Add any custom application properties below
+# app.custom.property=value
