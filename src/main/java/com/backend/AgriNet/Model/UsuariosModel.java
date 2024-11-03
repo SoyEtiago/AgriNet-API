@@ -19,19 +19,19 @@ import java.util.List;
 public class UsuariosModel {
     @Id
     @JsonIgnore
-    private ObjectId id;
+    private ObjectId _id;
     private String nombre;
     private Direccion direccion;
     private String foto;
-    private String resena;
+    private String reseña;
     private String email;
     private Credenciales credenciales;
     private List<Seguidor> seguidores = new ArrayList<>();
     private List<Seguido> seguidos = new ArrayList<>();
-    private List<ObjectId> colaboraciones = new ArrayList<>();
+    private List<Colaboracion> colaboraciones = new ArrayList<>();
 
-    @JsonProperty("id")
+    @JsonProperty("_id")
     public String getIdAsString() {
-        return id != null ? id.toHexString() : null;
+        return _id != null ? _id.toHexString() : null;
     }
 }
