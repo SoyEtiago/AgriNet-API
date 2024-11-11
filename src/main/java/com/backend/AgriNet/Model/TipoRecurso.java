@@ -8,11 +8,13 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
+import java.util.ArrayList;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public static class TipoRecurso {
+public class TipoRecurso {
     private String tipoDato;
     private List<Recurso> recurso = new ArrayList<>();
 }

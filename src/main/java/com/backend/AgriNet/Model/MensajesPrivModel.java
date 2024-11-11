@@ -10,7 +10,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Document(collection = "MensajesPriv")
@@ -31,15 +30,4 @@ public class MensajesPrivModel {
         return _id != null ? _id.toHexString() : null;
     }
     
-    public static class Replica {
-        private ObjectId remitente;
-        private TipoRecurso tipoRecurso;
-        private String texto;
-        private Date fechaEnvio;
-
-        public static class TipoRecurso {
-            private String tipoDato;
-            private List<String> recurso = new ArrayList<>();
-        }
-    }
 }

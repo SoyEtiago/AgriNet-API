@@ -45,21 +45,31 @@ public class MensajesPrivServiceImp implements IMensajesPrivService {
         return mensajeRecuperado.orElseThrow(() -> new RecursoNoEncontradoException("No existe el mensaje privado con id " + id));
     }
 
-    @Override
-    public String actualizarTextoMensaje(ObjectId id, int index, String nuevoTexto) {
-        MensajesPrivModel mensajePriv = buscarMensajePrivPorId(id);
+@Override
+public String actualizarTextoMensaje(ObjectId idMensajePriv, String nuevoTexto) {
+    // Buscar el documento MensajesPrivModel por su id
+    MensajesPrivModel mensajePriv = buscarMensajePrivPorId(idMensajePriv);
 
-        if (index >= 0 && index < mensajePriv.getMensajes().size()) {
-            mensajePriv.getMensajes().get(index).setTexto(nuevoTexto);
-            mensajePrivRepository.save(mensajePriv);
-            return String.format("El texto del mensaje en la posición %d del mensaje privado con id %s ha sido actualizado exitosamente.", index, id);
-        } else {
-            return String.format("Índice %d fuera de rango para el mensaje privado con id %s.", index, id);
-        }
+    // Buscar el mensaje en la lista `mensajes` por el texto actual
+    Optional<Mensaje> mensajeEncontrado = mensajePriv.getMensajes()
+                                                     .stream()
+                                                     .filter(m -> m.getTexto().equals(textoActual))
+                                                     .findFirst();
+    
+    if (mensajeEncontrado.isPresent()) {
+        // Actualizar el texto del mensaje encontrado
+        mensajeEncontrado.get().setTexto(nuevoTexto);
+        mensajePrivRepository.save(mensajePriv);
+        return String.format("El texto del mensaje con contenido '%s' ha sido actualizado exitosamente.", textoActual);
+    } else {
+        return String.format("Mensaje con contenido '%s' no encontrado en el mensaje privado con id %s.", textoActual, idMensajePriv);
     }
+}
+
+
 
     @Override
-    public String actualizarReplica(ObjectId id, MensajesPrivModel.Replica nuevaReplica) {
+    public String actualizarReplica(ObjectId id, Replica nuevaReplica) {
         MensajesPrivModel mensajePriv = buscarMensajePrivPorId(id);
         mensajePriv.setReplica(nuevaReplica);
         mensajePrivRepository.save(mensajePriv);
@@ -71,6 +81,7 @@ public class MensajesPrivServiceImp implements IMensajesPrivService {
         try {
             MensajesPrivModel mensajePriv = buscarMensajePrivPorId(id);
             mensajePrivRepository.delete(mensajePriv);
+
             return String.format("El mensaje privado con id %s fue eliminado exitosamente!", id);
         } catch (DataAccessException e) {
             return "Ocurrió un error al intentar eliminar el mensaje privado: " + e.getMessage();

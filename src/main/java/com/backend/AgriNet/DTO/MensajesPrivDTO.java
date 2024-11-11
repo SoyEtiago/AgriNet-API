@@ -1,23 +1,22 @@
 package com.backend.AgriNet.DTO;
 
-import com.backend.AgriNet.Model.Recurso;
 import com.backend.AgriNet.Model.Replica;
-import org.bson.types.ObjectId;
-
-import java.util.Date;
-import java.util.List;
+import com.backend.AgriNet.Model.Usuarios;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class MensajesPrivDTO {
-    private String contenido;
-    private ObjectId remitente;
-    private ObjectId destinatario;
-    private Date fechaEnvio;
-    private List<Recurso> recursos;
-    private List<Replica> replicas;
+    private ObjectId remitente; // ID del usuario remitente
+    private ObjectId destinatario; // ID del usuario destinatario
+    private List<MensajeDTO> mensajes = new ArrayList<>(); // Lista de mensajes
+    private Replica replica; // Lista de réplicas
 }

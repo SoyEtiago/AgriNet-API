@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public static class Usuarios {
+public class Usuarios {
     private ObjectId userRemi;
     private ObjectId userDest;
 }
