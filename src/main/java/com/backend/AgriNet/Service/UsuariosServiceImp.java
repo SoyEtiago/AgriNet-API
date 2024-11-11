@@ -1,10 +1,7 @@
 package com.backend.AgriNet.Service;
 
 import com.backend.AgriNet.Exception.RecursoNoEncontradoException;
-import com.backend.AgriNet.Model.Credenciales;
-import com.backend.AgriNet.Model.Estado;
-import com.backend.AgriNet.Model.Password;
-import com.backend.AgriNet.Model.UsuariosModel;
+import com.backend.AgriNet.Model.*;
 import com.backend.AgriNet.Repository.IUsuariosRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
