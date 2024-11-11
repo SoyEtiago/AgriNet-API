@@ -46,7 +46,7 @@ public class MensajesPrivServiceImp implements IMensajesPrivService {
     }
 
 @Override
-public String actualizarTextoMensaje(ObjectId idMensajePriv, String nuevoTexto) {
+public String actualizarTextoMensaje(ObjectId idMensajePriv, String textoActual, String nuevoTexto) {
     // Buscar el documento MensajesPrivModel por su id
     MensajesPrivModel mensajePriv = buscarMensajePrivPorId(idMensajePriv);
 
@@ -55,7 +55,7 @@ public String actualizarTextoMensaje(ObjectId idMensajePriv, String nuevoTexto) 
                                                      .stream()
                                                      .filter(m -> m.getTexto().equals(textoActual))
                                                      .findFirst();
-    
+
     if (mensajeEncontrado.isPresent()) {
         // Actualizar el texto del mensaje encontrado
         mensajeEncontrado.get().setTexto(nuevoTexto);
