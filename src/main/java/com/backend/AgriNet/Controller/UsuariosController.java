@@ -107,4 +107,3 @@ public class UsuariosController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el usuario de la base de datos.");
         }
     }
-}
