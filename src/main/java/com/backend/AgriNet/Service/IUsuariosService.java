@@ -6,9 +6,9 @@ import org.bson.types.ObjectId;
 import java.util.List;
 
 public interface IUsuariosService {
-    public String guardarUsuario(UsuariosModel usuario);
-    public List<UsuariosModel> listarUsuarios();
-    public UsuariosModel buscarUsuarioPorId(ObjectId id);
+    String guardarUsuario(UsuariosModel usuario);
+    List<UsuariosModel> listarUsuarios();
+    UsuariosModel buscarUsuarioPorId(ObjectId id);
 
     String actualizarNombre(ObjectId id, String nuevoNombre);
 
@@ -16,5 +16,5 @@ public interface IUsuariosService {
 
     String actualizarPassword(ObjectId id, String nuevoPassword);
 
-    public String eliminarUsuario(ObjectId id);
+    String eliminarUsuario(ObjectId id);
 }
