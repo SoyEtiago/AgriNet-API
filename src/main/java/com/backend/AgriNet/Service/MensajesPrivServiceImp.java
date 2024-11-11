@@ -45,26 +45,26 @@ public class MensajesPrivServiceImp implements IMensajesPrivService {
         return mensajeRecuperado.orElseThrow(() -> new RecursoNoEncontradoException("No existe el mensaje privado con id " + id));
     }
 
-@Override
-public String actualizarTextoMensaje(ObjectId idMensajePriv, String nuevoTexto) {
-    // Buscar el documento MensajesPrivModel por su id
-    MensajesPrivModel mensajePriv = buscarMensajePrivPorId(idMensajePriv);
+    @Override
+    public String actualizarTextoMensaje(ObjectId idMensajePriv, String textoActual, String nuevoTexto) {
+        // Buscar el documento MensajesPrivModel por su id
+        MensajesPrivModel mensajePriv = buscarMensajePrivPorId(idMensajePriv);
 
-    // Buscar el mensaje en la lista `mensajes` por el texto actual
-    Optional<Mensaje> mensajeEncontrado = mensajePriv.getMensajes()
-                                                     .stream()
-                                                     .filter(m -> m.getTexto().equals(textoActual))
-                                                     .findFirst();
-    
-    if (mensajeEncontrado.isPresent()) {
-        // Actualizar el texto del mensaje encontrado
-        mensajeEncontrado.get().setTexto(nuevoTexto);
-        mensajePrivRepository.save(mensajePriv);
-        return String.format("El texto del mensaje con contenido '%s' ha sido actualizado exitosamente.", textoActual);
-    } else {
-        return String.format("Mensaje con contenido '%s' no encontrado en el mensaje privado con id %s.", textoActual, idMensajePriv);
+        // Buscar el mensaje en la lista `mensajes` por el texto actual
+        Optional<Mensaje> mensajeEncontrado = mensajePriv.getMensajes()
+                                                         .stream()
+                                                         .filter(m -> m.getTexto().equals(textoActual))
+                                                         .findFirst();
+
+        if (mensajeEncontrado.isPresent()) {
+            // Actualizar el texto del mensaje encontrado
+            mensajeEncontrado.get().setTexto(nuevoTexto);
+            mensajePrivRepository.save(mensajePriv);
+            return String.format("El texto del mensaje con contenido '%s' ha sido actualizado exitosamente.", textoActual);
+        } else {
+            return String.format("Mensaje con contenido '%s' no encontrado en el mensaje privado con id %s.", textoActual, idMensajePriv);
+        }
     }
-}
 
 
 
