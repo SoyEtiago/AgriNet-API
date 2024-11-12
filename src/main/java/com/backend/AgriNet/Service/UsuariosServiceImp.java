@@ -90,4 +90,23 @@ public class UsuariosServiceImp implements IUsuariosService {
             return "Ocurrió un error al intentar eliminar el usuario: " + e.getMessage();
         }
     }
+    @Override
+    public UsuariosModel buscarUsuarioPorCorreo(String email) {
+        Optional<UsuariosModel> usuario = usuarioRepository.findByEmail(email);
+        return usuario.orElseThrow(() -> new RecursoNoEncontradoException("No existe un usuario con el correo: " + email));
+    }
+    @Override
+    public String actualizarCorreo(ObjectId id, String nuevoEmail) {
+        UsuariosModel usuario = buscarUsuarioPorId(id);
+
+        // Verificar si el correo ya está en uso
+        Optional<UsuariosModel> usuarioExistente = usuarioRepository.findByEmail(nuevoEmail);
+        if (usuarioExistente.isPresent() && !usuarioExistente.get().getIdAsString().equals(id.toHexString())) {
+            return "El correo electrónico ya está en uso por otro usuario.";
+        }
+
+        usuario.setEmail(nuevoEmail);
+        usuarioRepository.save(usuario);
+        return String.format("El correo electrónico del usuario con id %s ha sido actualizado exitosamente.", id);
+    }
 }

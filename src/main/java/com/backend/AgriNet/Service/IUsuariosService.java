@@ -1,5 +1,6 @@
 package com.backend.AgriNet.Service;
 
+import com.backend.AgriNet.Exception.RecursoNoEncontradoException;
 import com.backend.AgriNet.Model.UsuariosModel;
 import org.bson.types.ObjectId;
 
@@ -17,4 +18,8 @@ public interface IUsuariosService {
     String actualizarPassword(ObjectId id, String nuevoPassword);
 
     String eliminarUsuario(ObjectId id);
+
+    String actualizarCorreo(ObjectId id, String nuevoEmail) throws RecursoNoEncontradoException;
+
+    UsuariosModel buscarUsuarioPorCorreo(String email) throws RecursoNoEncontradoException;
 }
