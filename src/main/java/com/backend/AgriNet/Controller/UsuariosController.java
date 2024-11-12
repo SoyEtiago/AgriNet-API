@@ -1,5 +1,4 @@
 package com.backend.AgriNet.Controller;
-
 import com.backend.AgriNet.DTO.ActualizarCredencialesDTO;
 import com.backend.AgriNet.DTO.ActualizarNombreDTO;
 import com.backend.AgriNet.DTO.ActualizarReseñaDTO;
@@ -15,20 +14,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/Usuarios")
 public class UsuariosController {
     @Autowired
     IUsuariosService usuarioService;
-
     @GetMapping()
     public ResponseEntity<String> prueba() {
         return ResponseEntity.status(200).body("Hola, API");
     }
-
     @PostMapping("/insertar")
     public ResponseEntity<String> crearUsuario(@RequestBody UsuariosDTO usuarioDTO) {
         try {
@@ -39,9 +34,7 @@ public class UsuariosController {
             usuario.setReseña(usuarioDTO.getReseña());
             usuario.setEmail(usuarioDTO.getEmail());
             usuario.setCredenciales(usuarioDTO.getCredenciales());
-
             String resultado = usuarioService.guardarUsuario(usuario);
-
             return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
         } catch (DataAccessException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el usuario en la base de datos.");
@@ -49,13 +42,11 @@ public class UsuariosController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error inesperado al intentar guardar el usuario.");
         }
     }
-
     @GetMapping("/listar")
     public ResponseEntity<List<UsuariosModel>> listarUsuarios() {
         List<UsuariosModel> listaUsuarios = usuarioService.listarUsuarios();
         return ResponseEntity.status(200).body(listaUsuarios);
     }
-
     @GetMapping("/listar/{_id}")
     public ResponseEntity<?> listarUsuario(@PathVariable ObjectId _id) {
         try {
@@ -65,7 +56,6 @@ public class UsuariosController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
     @PatchMapping("/actualizar/nombre/{_id}")
     public ResponseEntity<String> actualizarNombre(@PathVariable ObjectId _id, @RequestBody ActualizarNombreDTO nombreDTO) {
         try {
@@ -75,7 +65,6 @@ public class UsuariosController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
     @PatchMapping("/actualizar/reseña/{_id}")
     public ResponseEntity<String> actualizarReseña(@PathVariable ObjectId _id, @RequestBody ActualizarReseñaDTO reseñaDTO) {
         try {
@@ -85,7 +74,6 @@ public class UsuariosController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
     @PatchMapping("/actualizar/password/{_id}")
     public ResponseEntity<String> actualizarPassword(@PathVariable ObjectId _id, @RequestBody String nuevoPassword) {
         try {
@@ -95,7 +83,6 @@ public class UsuariosController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
     @DeleteMapping("/eliminar/{_id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable ObjectId _id) {
         try {
