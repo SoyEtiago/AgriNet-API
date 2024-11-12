@@ -1,70 +1,40 @@
 package com.backend.AgriNet.Model;
 
-import java.sql.Date;
+import java.util.Date;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "Comentarios")
 public class Comentario {
     @Id
-    private String id;
-    private String proyectoId;
-    private String usuarioId;
+    private ObjectId id;
+    private ObjectId proyectoId;
+    private ObjectId usuarioId;
     private String texto;
     private Date fechaEnvio;
     private reply reply;
-    private String tipoRecurso;
-    private String tipoDato;
-    private String recurso;
 
-    // Getters y Setters
-
-    public String getTexto() {
-        return texto;
+    @JsonProperty("id")
+    public String getIdAsString() {
+        return id != null ? id.toHexString() : null;
     }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
+    @JsonProperty("proyectoId")
+    public String getProyectoIdAsString() {
+        return proyectoId != null ? proyectoId.toHexString() : null;
     }
-
-    public Date getFechaEnvio() {
-        return fechaEnvio;
-    }
-
-    public void setFechaEnvio(Date fechaEnvio) {
-        this.fechaEnvio = fechaEnvio;
-    }
-
-    public reply getReply() {
-        return reply;
-    }
-
-    public void setReply(reply reply) {
-        this.reply = reply;
-    }
-
-    public String getTipoRecurso() {
-        return tipoRecurso;
-    }
-
-    public void setTipoRecurso(String tipoRecurso) {
-        this.tipoRecurso = tipoRecurso;
-    }
-
-    public String getTipoDato() {
-        return tipoDato;
-    }
-
-    public void setTipoDato(String tipoDato) {
-        this.tipoDato = tipoDato;
-    }
-
-    public String getRecurso() {
-        return recurso;
-    }
-
-    public void setRecurso(String recurso) {
-        this.recurso = recurso;
+    @JsonProperty("usuarioId")
+    public String getUsuarioIdAsString() {
+        return usuarioId != null ? usuarioId.toHexString() : null;
     }
 }

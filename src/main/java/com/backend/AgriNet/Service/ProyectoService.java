@@ -1,11 +1,13 @@
 package com.backend.AgriNet.Service;
 
-import com.backend.AgriNet.Model.proyectos.Proyecto;
-import com.backend.AgriNet.Repository.IProyectosRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.backend.AgriNet.Model.Proyecto;
+import com.backend.AgriNet.Repository.IProyectosRepository;
 
 @Service
 public class ProyectoService implements IProyectosService {

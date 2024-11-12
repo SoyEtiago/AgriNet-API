@@ -38,9 +38,6 @@ public class ComentariosService implements IComentariosService {
         comentario.setTexto(comentarioDetails.getTexto());
         comentario.setFechaEnvio(comentarioDetails.getFechaEnvio());
         comentario.setReply(comentarioDetails.getReply());
-        comentario.setTipoRecurso(comentarioDetails.getTipoRecurso());
-        comentario.setTipoDato(comentarioDetails.getTipoDato());
-        comentario.setRecurso(comentarioDetails.getRecurso());
 
         return comentarioRepository.save(comentario);
     }
